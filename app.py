@@ -27,6 +27,16 @@ st.warning(
 company = st.text_input("Company name", placeholder="e.g. Beehive, Sarwa, Careem")
 run_clicked = st.button("Research", type="primary", disabled=not company.strip())
 
+
+def _md_safe(text: str) -> str:
+    # Report text is full of dollar amounts ("$3.1 billion ... $400
+    # million"). Streamlit's markdown renderer treats $...$ as LaTeX math
+    # delimiters, so two dollar amounts on the same block get parsed as
+    # one giant math expression — the actual bug behind the garbled
+    # "3.1\nb\ni\nl\nl\ni\no\nn..." rendering. Escaping $ turns it back
+    # into a literal character.
+    return text.replace("$", "\\$")
+
 def _error_detail(response: httpx.Response) -> str:
     # The error body isn't guaranteed to be our own JSON error shape — a
     # proxy/gateway error returns an HTML page instead, which .json()
@@ -75,14 +85,14 @@ if run_clicked and company.strip():
         st.error(f"Couldn't reach the research backend: {exc}")
 
     if report:
-        st.subheader(report["company"])
+        st.subheader(_md_safe(report["company"]))
         st.caption(f"Generated {report['generated_at']}")
-        st.write(report["summary"])
+        st.write(_md_safe(report["summary"]))
 
         if report["red_flags"]:
             st.subheader("🚩 Red flags")
             for flag in report["red_flags"]:
-                st.error(flag)
+                st.error(_md_safe(flag))
 
         st.subheader("Key facts")
         verified = [f for f in report["key_facts"] if f["confidence"] == "verified"]
@@ -94,7 +104,7 @@ if run_clicked and company.strip():
                 sources = " · ".join(
                     f"[source]({url})" for url in fact["sources"]
                 )
-                st.markdown(f"- {fact['claim']} ({sources})")
+                st.markdown(f"- {_md_safe(fact['claim'])} ({sources})")
 
         if flagged:
             st.markdown("**⚑ Flagged** — single-sourced or conflicting, unverified")
@@ -102,7 +112,7 @@ if run_clicked and company.strip():
                 sources = " · ".join(
                     f"[source]({url})" for url in fact["sources"]
                 )
-                st.markdown(f"- {fact['claim']} ({sources})")
+                st.markdown(f"- {_md_safe(fact['claim'])} ({sources})")
 
         if not verified and not flagged:
             st.info("No public information could be found for this company.")
