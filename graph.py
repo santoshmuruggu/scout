@@ -1,14 +1,17 @@
-"""LangGraph state machine for Scout: plan -> act -> cluster -> verify ->
-synthesize -> critique -> END.
+"""LangGraph state machine for Scout: plan -> act -> cluster -> synthesize
+-> critique -> END.
 
 Day 4 note on why there's a cluster step the original 5-step sketch didn't
-mention: verify() (see verify.py) needs findings already grouped by
-identical claim, but two independent articles agreeing "founded 2014" and
-"launched November 2014" never share exact wording. Grouping is a
-semantic judgment call, so an LLM does it (cluster_node); the actual
-verified-vs-flagged decision stays deterministic, domain-counting Python
-(verify.py) — that split keeps the one part of this pipeline that most
-needs to be auditable free of model judgment.
+mention, and why verify() isn't its own graph node: verify() (see
+verify.py) needs findings already grouped by identical claim, but two
+independent articles agreeing "founded 2014" and "launched November 2014"
+never share exact wording. Grouping is a semantic judgment call, so an
+LLM does it (cluster_node) — and verify() runs as a plain function call
+right after, still inside cluster_node, since the actual verified-vs-
+flagged decision stays deterministic, domain-counting Python with
+nothing for a graph node's retry/observability machinery to add. That
+split keeps the one part of this pipeline that most needs to be
+auditable free of model judgment.
 """
 
 import sys
