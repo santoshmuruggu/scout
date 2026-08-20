@@ -1,0 +1,684 @@
+{
+  "summary": {
+    "companies_run": 15,
+    "runs_with_errors": 0,
+    "factual_recall": 0.788,
+    "confidence_agreement": 0.379,
+    "confidence_disagreement_breakdown": {
+      "gt_flagged_scout_verified": 21,
+      "gt_verified_scout_flagged": 5,
+      "note": "gt_flagged_scout_verified is usually NOT a Scout error \u2014 ground truth confidence reflects how many sources a quick draft-research pass happened to find, and Scout's live multi-search pipeline often finds more corroboration than that pass did. gt_verified_scout_flagged is the direction that would actually indicate Scout under-verifying."
+    },
+    "flagging_precision_on_sparse_tier": 0.375,
+    "tool_call_success_rate": 1.0,
+    "avg_elapsed_seconds": 92.6
+  },
+  "per_company": [
+    {
+      "company": "Careem",
+      "tier": "well_documented",
+      "run_error": null,
+      "elapsed_seconds": 65.5,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 8,
+      "report_flagged_count": 32,
+      "ground_truth_facts": 5,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 3,
+      "ground_truth_not_found": 1,
+      "gt_flagged_scout_verified": 1,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded 2012 by Mudassir Sheikha and Magnus Olsson; Abdulla Elyas joined as third co-founder in 2013",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Headquartered in Dubai, UAE",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Acquired by Uber for $3.1 billion, deal closed January 2020",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "2023 fintech/super-app spinout with $400M investment from e&",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Registered entity name is Careem Networks FZ-LLC",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "Emirates NBD",
+      "tier": "well_documented",
+      "run_error": null,
+      "elapsed_seconds": 145.5,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 10,
+      "report_flagged_count": 62,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 0,
+      "ground_truth_not_found": 0,
+      "gt_flagged_scout_verified": 4,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Formed 6 March 2007 via merger of Emirates Bank International and National Bank of Dubai",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Shares listed on DFM on 16 October 2007",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Headquartered in Deira, Dubai",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Traces roots to National Bank of Dubai, established 1963",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "DP World",
+      "tier": "well_documented",
+      "run_error": null,
+      "elapsed_seconds": 97.8,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 10,
+      "report_flagged_count": 47,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 3,
+      "ground_truth_confidence_agrees": 1,
+      "ground_truth_not_found": 1,
+      "gt_flagged_scout_verified": 1,
+      "gt_verified_scout_flagged": 1,
+      "judgements": [
+        {
+          "ground_truth_claim": "Created in 2005 from the merger of Dubai Ports Authority and Dubai Ports International",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Controlling parent is Dubai World, controlled by the Government of Dubai",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Sultan Ahmed bin Sulayem became Chairman in 2007, currently Group Chairman & CEO",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "New global HQ under construction at Expo City Dubai",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "Emaar Properties",
+      "tier": "well_documented",
+      "run_error": null,
+      "elapsed_seconds": 96.9,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 10,
+      "report_flagged_count": 44,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 1,
+      "ground_truth_not_found": 0,
+      "gt_flagged_scout_verified": 3,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded 16 June 1997 by Mohamed Ali Alabbar (Chairman)",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Headquartered in Dubai, UAE",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Publicly traded on DFM",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Developer of Burj Khalifa, the world's tallest building",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "e&",
+      "tier": "well_documented",
+      "run_error": null,
+      "elapsed_seconds": 99.4,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 4,
+      "report_flagged_count": 55,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 2,
+      "ground_truth_confidence_agrees": 1,
+      "ground_truth_not_found": 2,
+      "gt_flagged_scout_verified": 0,
+      "gt_verified_scout_flagged": 1,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded 1976 as Emirates Telecommunications Corporation",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Rebranded from Etisalat to \"e&\" in February 2022",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Headquartered in Abu Dhabi, operates across 38 countries",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "2024 consolidated net revenue AED 59.2 billion, net profit AED 10.8 billion",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "du",
+      "tier": "well_documented",
+      "run_error": null,
+      "elapsed_seconds": 81.4,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 5,
+      "report_flagged_count": 22,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 4,
+      "ground_truth_not_found": 0,
+      "gt_flagged_scout_verified": 0,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded 2006 as Emirates Integrated Telecommunications Company (EITC)",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Commercially rebranded as \"du\" in February 2007",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Headquartered in Dubai, UAE",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "One of two main UAE telecom operators, alongside e&",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        }
+      ]
+    },
+    {
+      "company": "noon.com",
+      "tier": "well_documented",
+      "run_error": null,
+      "elapsed_seconds": 90.9,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 7,
+      "report_flagged_count": 39,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 1,
+      "ground_truth_confidence_agrees": 1,
+      "ground_truth_not_found": 3,
+      "gt_flagged_scout_verified": 0,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Launched by Mohamed Alabbar in partnership with Saudi Arabia's PIF, stated $1 billion initial commitment",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Went live in UAE September 2017, followed by Saudi Arabia December 2017",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Logistics center located in Dubai World Central, near Al Maktoum Airport",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Alabbar is also founder-linked to Zand digital bank",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "Sarwa",
+      "tier": "smaller_findable",
+      "run_error": null,
+      "elapsed_seconds": 95.7,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 9,
+      "report_flagged_count": 31,
+      "ground_truth_facts": 5,
+      "ground_truth_matched": 5,
+      "ground_truth_confidence_agrees": 2,
+      "ground_truth_not_found": 0,
+      "gt_flagged_scout_verified": 3,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded December 2017 by Mark Chahwan, Jad Sayegh, and Nadine Mezher",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "First company to graduate from the DFSA's regulatory sandbox",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Robo-advisory / hybrid wealth management platform (automated + human advisors)",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Raised $8.4M in a funding round",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Surpassed $1 billion in assets under management (exact year unclear)",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "Beehive",
+      "tier": "smaller_findable",
+      "run_error": null,
+      "elapsed_seconds": 109.3,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 9,
+      "report_flagged_count": 40,
+      "ground_truth_facts": 3,
+      "ground_truth_matched": 3,
+      "ground_truth_confidence_agrees": 2,
+      "ground_truth_not_found": 0,
+      "gt_flagged_scout_verified": 1,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Launched November 2014 by Craig Moore, supported by Rick Pudner (former Group CEO of Emirates NBD)",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "First P2P SME lending platform to set up in DIFC and receive DFSA regulation",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Raised $4 million to expand into Bahrain and Saudi Arabia",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        }
+      ]
+    },
+    {
+      "company": "Bayzat",
+      "tier": "smaller_findable",
+      "run_error": null,
+      "elapsed_seconds": 91.9,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 15,
+      "report_flagged_count": 35,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 3,
+      "ground_truth_confidence_agrees": 1,
+      "ground_truth_not_found": 1,
+      "gt_flagged_scout_verified": 1,
+      "gt_verified_scout_flagged": 1,
+      "judgements": [
+        {
+          "ground_truth_claim": "Co-founded 2013 by Brian Habibi, Talal Bayaa, and Tarek Bayaa",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Started as a health-insurance comparison platform, later expanded into HR/payroll",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Raised $16M Series B in 2019, led by Point72 Ventures with Mubadala Capital participating",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Raised $25M Series C in December 2022, led by DisruptAD (ADQ) with Ischyros participating",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "Pyypl",
+      "tier": "smaller_findable",
+      "run_error": null,
+      "elapsed_seconds": 81.5,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 13,
+      "report_flagged_count": 33,
+      "ground_truth_facts": 5,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 2,
+      "ground_truth_not_found": 1,
+      "gt_flagged_scout_verified": 1,
+      "gt_verified_scout_flagged": 1,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded 2017 by Antti Arponen (former Chief Digital Officer, Virgin Mobile MEA) and Phil Reynolds",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Headquartered in Abu Dhabi, with Dubai operations also referenced",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "ADGM's FSRA imposed a $486,000 fine (Oct 2023) for inadequate AML controls and acting outside licensed scope, March 2021-November 2022; no evidence of actual money laundering found",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Raised $20M in a round, with an earlier $11M Series A",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "ADGM public register lists Pyypl Ltd as a regulated financial services firm",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        }
+      ]
+    },
+    {
+      "company": "Zand Bank",
+      "tier": "smaller_findable",
+      "run_error": null,
+      "elapsed_seconds": 94.8,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 11,
+      "report_flagged_count": 32,
+      "ground_truth_facts": 4,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 1,
+      "ground_truth_not_found": 0,
+      "gt_flagged_scout_verified": 2,
+      "gt_verified_scout_flagged": 1,
+      "judgements": [
+        {
+          "ground_truth_claim": "Received a full CBUAE banking license, reported as 5 July 2022 (one source says 30 June 2022 \u2014 minor date variance)",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Marketed as \"UAE's first fully licensed, all-digital bank\"",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Chaired by Mohamed Alabbar",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Launched an institutional-grade digital asset custody offering",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        }
+      ]
+    },
+    {
+      "company": "Fetchr",
+      "tier": "sparse_conflicting",
+      "run_error": null,
+      "elapsed_seconds": 84.7,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 9,
+      "report_flagged_count": 25,
+      "ground_truth_facts": 5,
+      "ground_truth_matched": 3,
+      "ground_truth_confidence_agrees": 2,
+      "ground_truth_not_found": 2,
+      "gt_flagged_scout_verified": 0,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded 2012 by Idriss Al Rifai and Joy Ajlouny",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Idriss Al Rifai left the company in January 2020 to join Glovo",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Nearly collapsed in late 2019: raised ~$10M emergency funding, cut ~1,230 jobs, closed operations in three countries",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "In 2021, Saudi tax authority imposed a ~$100M VAT/zakat bill, scaring off rescue investors; top backer warned of possible liquidation",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Current operational status (open vs. permanently closed)",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        }
+      ]
+    },
+    {
+      "company": "Spotii",
+      "tier": "sparse_conflicting",
+      "run_error": null,
+      "elapsed_seconds": 69.0,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 4,
+      "report_flagged_count": 24,
+      "ground_truth_facts": 6,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 2,
+      "ground_truth_not_found": 2,
+      "gt_flagged_scout_verified": 2,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founding year",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Co-founded by Anuscha Iqbal and Ziyaad Ahmed",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Acquired by Australia's Zip in 2021",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Acquisition price reported as $16.3 million",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Acquisition price reported as $20 million",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Zip exited the Middle East in 2023; Spotii then acquired by NymCard in June 2023",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    },
+    {
+      "company": "Pure Harvest Smart Farms",
+      "tier": "sparse_conflicting",
+      "run_error": null,
+      "elapsed_seconds": 84.7,
+      "tool_calls": 7,
+      "tool_errors": [],
+      "report_verified_count": 6,
+      "report_flagged_count": 31,
+      "ground_truth_facts": 5,
+      "ground_truth_matched": 4,
+      "ground_truth_confidence_agrees": 2,
+      "ground_truth_not_found": 1,
+      "gt_flagged_scout_verified": 2,
+      "gt_verified_scout_flagged": 0,
+      "judgements": [
+        {
+          "ground_truth_claim": "Founded by Sky Kurtz, Mahmoud Adi, and Robert Kupstas; founding year cited as 2016 by one source though earliest press coverage is 2017-2019",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Sky Kurtz is CEO, a former US private-equity investor",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "Agtech company operating climate-controlled greenhouses; raised $180.5M from global investors in a 2022 round",
+          "found_in_report": true,
+          "scout_confidence": "flagged",
+          "agrees_with_ground_truth": true
+        },
+        {
+          "ground_truth_claim": "Total cumulative funding raised since 2017",
+          "found_in_report": true,
+          "scout_confidence": "verified",
+          "agrees_with_ground_truth": false
+        },
+        {
+          "ground_truth_claim": "As of Sept 2024, seeking $100M+ for expansion into Singapore, Morocco, and Kuwait, and spinning off its Saudi operation; backers per Semafor include the Olayan family, Metric Capital Partners, Franklin Templeton, Shuaa Capital, and IMM Investment Corp",
+          "found_in_report": false,
+          "scout_confidence": "not_found",
+          "agrees_with_ground_truth": false
+        }
+      ]
+    }
+  ]
+}

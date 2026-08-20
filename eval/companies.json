@@ -1,0 +1,234 @@
+{
+  "_meta": {
+    "description": "Eval ground truth for Scout. Facts and sources were drafted from a live research pass and need a manual review before being trusted as ground truth — that review is the actual point of this file, not a formality.",
+    "review_status": "draft — not yet hand-verified",
+    "confidence_rule": "verified = claim corroborated by >=2 distinct source domains; flagged = single-sourced, conflicting, or unconfirmed",
+    "tiers": {
+      "well_documented": "widely covered, should be easy for Scout to verify",
+      "smaller_findable": "real but less press coverage, findable with effort",
+      "sparse_conflicting": "deliberately chosen because public info is sparse or sources disagree — Scout must flag, not fabricate"
+    }
+  },
+  "companies": [
+    {
+      "name": "Careem",
+      "legal_name": "Careem Networks FZ-LLC",
+      "tier": "well_documented",
+      "jurisdiction": "Free zone (Dubai Internet City / Dubai Development Authority)",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Founded 2012 by Mudassir Sheikha and Magnus Olsson; Abdulla Elyas joined as third co-founder in 2013", "sources": ["https://en.wikipedia.org/wiki/Careem", "https://www.cnbc.com/video/2026/08/13/careem-founder-mudassir-sheikha.html"], "confidence": "verified"},
+        {"claim": "Headquartered in Dubai, UAE", "sources": ["https://www.careem.com/en-AE/about-us/"], "confidence": "flagged", "note": "single source found in this pass; widely known but recheck against an independent source"},
+        {"claim": "Acquired by Uber for $3.1 billion, deal closed January 2020", "sources": ["https://investor.uber.com/news-events/news/press-release-details/2020/Uber-Completes-Acquisition-of-Careem/default.aspx", "https://techstartups.com/2020/01/06/uber-completes-3-1-billion-acquisition-careem/"], "confidence": "verified"},
+        {"claim": "2023 fintech/super-app spinout with $400M investment from e&", "sources": ["https://techstartups.com/2023/04/10/uber-owned-ride-hailing-startup-careem-launches-spinout-with-400-million-investment-from-uae-tech-holding-company-e/"], "confidence": "flagged"},
+        {"claim": "Registered entity name is Careem Networks FZ-LLC", "sources": ["https://www.zawya.com/company/5047641717/careem-networks-fz-llc"], "confidence": "flagged"}
+      ]
+    },
+    {
+      "name": "Emirates NBD",
+      "legal_name": "Emirates NBD Bank PJSC",
+      "tier": "well_documented",
+      "jurisdiction": "Mainland, PJSC, listed on Dubai Financial Market",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Formed 6 March 2007 via merger of Emirates Bank International and National Bank of Dubai", "sources": ["https://www.emiratesnbd.com/en/about-emirates-nbd/our-journey"], "confidence": "flagged", "note": "only the bank's own site found in this pass — self-sourced, recommend independent corroboration"},
+        {"claim": "Shares listed on DFM on 16 October 2007", "sources": ["https://www.emiratesnbd.com/en/about-emirates-nbd/our-journey"], "confidence": "flagged"},
+        {"claim": "Headquartered in Deira, Dubai", "sources": ["https://www.emiratesnbd.com.eg/en/about-us/about-emirates-nbd-group"], "confidence": "flagged"},
+        {"claim": "Traces roots to National Bank of Dubai, established 1963", "sources": ["https://www.emiratesnbd.com/en/about-emirates-nbd/our-journey"], "confidence": "flagged"}
+      ]
+    },
+    {
+      "name": "DP World",
+      "legal_name": "DP World",
+      "tier": "well_documented",
+      "jurisdiction": "Government-controlled (parent Dubai World / Government of Dubai); operational base Jebel Ali Free Zone",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Created in 2005 from the merger of Dubai Ports Authority and Dubai Ports International", "sources": ["https://pestel-analysis.com/blogs/owners/dpworld"], "confidence": "flagged", "note": "single, non-primary source — recommend official DP World history page or a wire service"},
+        {"claim": "Controlling parent is Dubai World, controlled by the Government of Dubai", "sources": ["https://pestel-analysis.com/blogs/owners/dpworld"], "confidence": "flagged"},
+        {"claim": "Sultan Ahmed bin Sulayem became Chairman in 2007, currently Group Chairman & CEO", "sources": ["https://www.bbntimes.com/companies/who-is-sultan-ahmed-bin-sulayem-the-ceo-of-dp-world-and-the-chairman-of-the-ports-customs-free-zone-corporation", "https://internationalfinance.com/business-leaders/business-leader-week-meet-sultan-ahmed-bin-sulayem-chairman-ceo-dp-world/"], "confidence": "verified"},
+        {"claim": "New global HQ under construction at Expo City Dubai", "sources": ["https://www.dpworld.com/en/news/dp-worlds-new-global-headquarters-rises-at-expo-city"], "confidence": "flagged"}
+      ],
+      "notes": "Current exact listing/private status not independently re-verified in the research pass — check before treating as settled."
+    },
+    {
+      "name": "Emaar Properties",
+      "legal_name": "Emaar Properties PJSC",
+      "tier": "well_documented",
+      "jurisdiction": "Mainland, PJSC, listed on Dubai Financial Market (EMAAR)",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Founded 16 June 1997 by Mohamed Ali Alabbar (Chairman)", "sources": ["https://en.wikipedia.org/wiki/Emaar_Properties", "https://www.mohamedalabbar.com/business-ventures/real-estate/"], "confidence": "verified"},
+        {"claim": "Headquartered in Dubai, UAE", "sources": ["https://www.zoominfo.com/c/emaar-properties-pjsc/54151649"], "confidence": "flagged"},
+        {"claim": "Publicly traded on DFM", "sources": ["https://en.wikipedia.org/wiki/Emaar_Properties"], "confidence": "flagged"},
+        {"claim": "Developer of Burj Khalifa, the world's tallest building", "sources": ["https://www.forbes.com/companies/emaar-properties/"], "confidence": "flagged"}
+      ]
+    },
+    {
+      "name": "e&",
+      "legal_name": "Emirates Telecommunications Group Company PJSC (formerly Etisalat)",
+      "tier": "well_documented",
+      "jurisdiction": "Mainland, federal telecom operator, PJSC, HQ Abu Dhabi",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Founded 1976 as Emirates Telecommunications Corporation", "sources": ["https://www.forbes.com/companies/etisalat/", "https://www.weforum.org/organizations/emirates-telecommunications-corporation-etisalat/"], "confidence": "verified"},
+        {"claim": "Rebranded from Etisalat to \"e&\" in February 2022", "sources": ["https://grokipedia.com/page/Etisalat", "https://www.agbi.com/companies/etisalat-by-e/"], "confidence": "verified"},
+        {"claim": "Headquartered in Abu Dhabi, operates across 38 countries", "sources": ["https://www.forbes.com/companies/etisalat/"], "confidence": "flagged"},
+        {"claim": "2024 consolidated net revenue AED 59.2 billion, net profit AED 10.8 billion", "sources": ["https://www.agbi.com/companies/etisalat-by-e/"], "confidence": "flagged"}
+      ],
+      "notes": "Exact stock-exchange listing (widely known to be ADX) was not independently sourced in this pass."
+    },
+    {
+      "name": "du",
+      "legal_name": "Emirates Integrated Telecommunications Company PJSC (EITC)",
+      "tier": "well_documented",
+      "jurisdiction": "Mainland, PJSC, HQ Dubai",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Founded 2006 as Emirates Integrated Telecommunications Company (EITC)", "sources": ["https://en.wikipedia.org/wiki/Du_(company)"], "confidence": "flagged"},
+        {"claim": "Commercially rebranded as \"du\" in February 2007", "sources": ["https://en.wikipedia.org/wiki/Du_(company)"], "confidence": "flagged"},
+        {"claim": "Headquartered in Dubai, UAE", "sources": ["https://www.zoominfo.com/c/du/92294959"], "confidence": "flagged"},
+        {"claim": "One of two main UAE telecom operators, alongside e&", "sources": ["https://www.devex.com/organizations/du-emirates-integrated-telecommunications-company-eitc-205075"], "confidence": "flagged"}
+      ]
+    },
+    {
+      "name": "noon.com",
+      "legal_name": "Noon (exact legal entity/free zone unconfirmed)",
+      "tier": "well_documented",
+      "jurisdiction": "Unknown — likely free zone, not independently confirmed",
+      "jurisdiction_confirmed": false,
+      "ground_truth_facts": [
+        {"claim": "Launched by Mohamed Alabbar in partnership with Saudi Arabia's PIF, stated $1 billion initial commitment", "sources": ["https://www.thenationalnews.com/business/alabbar-s-noon-com-launches-operations-in-saudi-arabia-1.683903", "https://magnitt.com/news/e-commerce-platform-noon-launches-uae-21169"], "confidence": "verified"},
+        {"claim": "Went live in UAE September 2017, followed by Saudi Arabia December 2017", "sources": ["https://magnitt.com/news/e-commerce-platform-noon-launches-uae-21169"], "confidence": "flagged"},
+        {"claim": "Logistics center located in Dubai World Central, near Al Maktoum Airport", "sources": ["https://magnitt.com/news/e-commerce-platform-noon-launches-uae-21169"], "confidence": "flagged"},
+        {"claim": "Alabbar is also founder-linked to Zand digital bank", "sources": ["https://www.mohamedalabbar.com/business-ventures/technology/"], "confidence": "flagged"}
+      ],
+      "rejected_hypotheses": [
+        "A co-founder named \"Loujain al-Ngowaisheh\" was searched for but not corroborated by any source — do not treat as fact."
+      ]
+    },
+    {
+      "name": "Sarwa",
+      "legal_name": "Sarwa (exact DIFC-registered legal name unconfirmed)",
+      "tier": "smaller_findable",
+      "jurisdiction": "DIFC, DFSA-regulated (FinTech Hive)",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Founded December 2017 by Mark Chahwan, Jad Sayegh, and Nadine Mezher", "sources": ["https://medium.com/wharton-fintech/emerging-fintech-how-sarwa-means-wealth-in-the-middle-east-f2b9711d6094", "https://en.everybodywiki.com/Sarwa"], "confidence": "verified"},
+        {"claim": "First company to graduate from the DFSA's regulatory sandbox", "sources": ["https://en.everybodywiki.com/Sarwa"], "confidence": "flagged"},
+        {"claim": "Robo-advisory / hybrid wealth management platform (automated + human advisors)", "sources": ["https://www.bcg.com/publications/2021/bionic-innovation-interview-series-with-mark-chahwan-nadine-mezher-from-sarwa"], "confidence": "flagged"},
+        {"claim": "Raised $8.4M in a funding round", "sources": ["https://www.thenationalnews.com/business/money/robo-advisory-sarwa-sets-eyes-on-abu-dhabi-as-it-raises-8-4m-in-new-financing-1.967656"], "confidence": "flagged"},
+        {"claim": "Surpassed $1 billion in assets under management (exact year unclear)", "sources": ["https://en.incarabia.com/mark-chahwan-on-sarwa%E2%80%99s-1-billion-milestone-and-the-uae%E2%80%99s-growing-investing-culture-865863.html"], "confidence": "flagged"}
+      ]
+    },
+    {
+      "name": "Beehive",
+      "legal_name": "Beehive P2P Ltd (exact legal suffix unconfirmed)",
+      "tier": "smaller_findable",
+      "jurisdiction": "DIFC, DFSA-regulated",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Launched November 2014 by Craig Moore, supported by Rick Pudner (former Group CEO of Emirates NBD)", "sources": ["https://www.prnewswire.com/news-releases/fintech-business-beehive-is-the-first-peer-to-peer-lending-platform-to-receive-dfsa-regulation-615411013.html", "https://magnitt.com/news/fintech-business-beehive-first-peer-peer-lending-platform-receive-dfsa-regulation-17780"], "confidence": "verified"},
+        {"claim": "First P2P SME lending platform to set up in DIFC and receive DFSA regulation", "sources": ["https://magnitt.com/news/fintech-business-beehive-first-peer-peer-lending-platform-receive-dfsa-regulation-17780"], "confidence": "flagged"},
+        {"claim": "Raised $4 million to expand into Bahrain and Saudi Arabia", "sources": ["https://www.menabytes.com/beehive-4-million/"], "confidence": "flagged"}
+      ]
+    },
+    {
+      "name": "Bayzat",
+      "legal_name": "Bayzat (exact registration type unconfirmed)",
+      "tier": "smaller_findable",
+      "jurisdiction": "Dubai vs. Abu Dhabi — sources conflict, see below",
+      "jurisdiction_confirmed": false,
+      "ground_truth_facts": [
+        {"claim": "Co-founded 2013 by Brian Habibi, Talal Bayaa, and Tarek Bayaa", "sources": ["https://www.menabytes.com/bayzat-series-b/", "https://www.edtechreview.in/news/uae-based-hrtech-startup-bayzat-raises-25m-in-series-c-round/"], "confidence": "verified"},
+        {"claim": "Started as a health-insurance comparison platform, later expanded into HR/payroll", "sources": ["https://www.menabytes.com/bayzat-series-b/"], "confidence": "flagged"},
+        {"claim": "Raised $16M Series B in 2019, led by Point72 Ventures with Mubadala Capital participating", "sources": ["https://www.menabytes.com/bayzat-series-b/", "https://techstartups.com/2019/10/22/abu-dhabi-based-tech-startup-bayzat-scores-16-million-in-series-b-funding-to-grow-its-insurance-and-hr-software-solutions-platform/"], "confidence": "verified"},
+        {"claim": "Raised $25M Series C in December 2022, led by DisruptAD (ADQ) with Ischyros participating", "sources": ["https://www.bayzat.com/blog/bayzat-targets-becoming-middle-east-leader-in-hr-insuretech-following-25million-series-c-round/"], "confidence": "flagged"}
+      ],
+      "known_conflicts": [
+        "HQ city is disputed: TechStartups describes Bayzat as 'Abu Dhabi-based', while MenaBytes and Bayzat's own blog imply Dubai. Good real-world test case for whether Scout flags rather than picks one confidently."
+      ]
+    },
+    {
+      "name": "Pyypl",
+      "legal_name": "Pyypl Ltd",
+      "tier": "smaller_findable",
+      "jurisdiction": "Abu Dhabi Global Market (ADGM), licensed money-service provider (FSRA)",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Founded 2017 by Antti Arponen (former Chief Digital Officer, Virgin Mobile MEA) and Phil Reynolds", "sources": ["https://www.cbinsights.com/company/pyypl"], "confidence": "flagged", "note": "single source found in this pass, recommend a second check"},
+        {"claim": "Headquartered in Abu Dhabi, with Dubai operations also referenced", "sources": ["https://www.cbinsights.com/company/pyypl"], "confidence": "flagged"},
+        {"claim": "ADGM's FSRA imposed a $486,000 fine (Oct 2023) for inadequate AML controls and acting outside licensed scope, March 2021-November 2022; no evidence of actual money laundering found", "sources": ["https://www.adgm.com/media/announcements/adgms-fsra-imposes-a-financial-penalty-of-usd-486000-on-pyypl-ltd", "https://www.thenationalnews.com/business/economy/2023/10/04/adgm-levies-486000-fine-on-pyppl-for-anti-money-laundering-failures/", "https://gulfnews.com/business/markets/adgm-fines-pyypl-486000-for-aml-non-compliance-and-unauthorised-activity-1.1696407013169"], "confidence": "verified"},
+        {"claim": "Raised $20M in a round, with an earlier $11M Series A", "sources": ["https://fintechmagazine.com/articles/uae-based-fintech-pyypl-raises-20mn-for-its-mobile-finserv-platform", "https://www.forbesmiddleeast.com/innovation/startups/fintech-startup-pyypl-raises-$11m-in-series-a-funding-round"], "confidence": "verified"},
+        {"claim": "ADGM public register lists Pyypl Ltd as a regulated financial services firm", "sources": ["https://www.adgm.com/public-registers/fsra/fsf/pyypl-ltd"], "confidence": "flagged", "note": "primary regulator source, but single-sourced by domain-count rule"}
+      ],
+      "rejected_hypotheses": [
+        "A founder named \"Mo Ali Yusuf\" was searched for but not corroborated — do not treat as fact."
+      ],
+      "notes": "The AML fine is a strong, well-corroborated red-flag fact — good test of whether Scout surfaces negative findings, not just positive ones."
+    },
+    {
+      "name": "Zand Bank",
+      "legal_name": "Zand Bank PJSC",
+      "tier": "smaller_findable",
+      "jurisdiction": "Mainland, licensed directly by the Central Bank of the UAE",
+      "jurisdiction_confirmed": true,
+      "ground_truth_facts": [
+        {"claim": "Received a full CBUAE banking license, reported as 5 July 2022 (one source says 30 June 2022 — minor date variance)", "sources": ["https://english.alarabiya.net/business/banking-and-finance/2022/07/05/Digital-bank-Zand-receives-UAE-banking-license", "https://www.thenationalnews.com/business/banking/2022/07/05/dubai-digital-bank-zand-gets-uae-central-bank-licence/", "https://www.fintechfutures.com/bankingtech/digital-challenger-zand-lands-banking-licence-from-uae-central-bank"], "confidence": "verified", "note": "exact date has a minor cross-source discrepancy, worth a primary CBUAE check"},
+        {"claim": "Marketed as \"UAE's first fully licensed, all-digital bank\"", "sources": ["https://www.zand.ae/en"], "confidence": "flagged"},
+        {"claim": "Chaired by Mohamed Alabbar", "sources": ["https://www.zand.ae/en/about-us"], "confidence": "flagged"},
+        {"claim": "Launched an institutional-grade digital asset custody offering", "sources": ["https://www.zawya.com/en/press-release/companies-news/zand-revolutionizes-uae-banking-with-institutional-grade-digital-asset-custody-ocv98f8y"], "confidence": "flagged"}
+      ]
+    },
+    {
+      "name": "Fetchr",
+      "legal_name": "Fetchr (Dubai last-mile delivery/logistics startup)",
+      "tier": "sparse_conflicting",
+      "jurisdiction": "Dubai-based; specific registration unconfirmed",
+      "jurisdiction_confirmed": false,
+      "ground_truth_facts": [
+        {"claim": "Founded 2012 by Idriss Al Rifai and Joy Ajlouny", "sources": ["https://alejandrocremades.com/idriss-al-rifai/", "https://www.thenationalnews.com/business/economy/generation-start-up-funding-was-petrifying-in-the-early-days-says-fetchr-founder-1.625104"], "confidence": "verified"},
+        {"claim": "Idriss Al Rifai left the company in January 2020 to join Glovo", "sources": [], "confidence": "flagged", "note": "no primary source URL isolated in this pass — needs verification before use"},
+        {"claim": "Nearly collapsed in late 2019: raised ~$10M emergency funding, cut ~1,230 jobs, closed operations in three countries", "sources": ["https://gulfnews.com/technology/companies/dubai-based-fetchr-narrowly-averts-collapse-1.68247559", "https://www.menabytes.com/fetchr-15-million/"], "confidence": "verified"},
+        {"claim": "In 2021, Saudi tax authority imposed a ~$100M VAT/zakat bill, scaring off rescue investors; top backer warned of possible liquidation", "sources": ["https://gulfbusiness.com/top-backer-of-dubai-app-fetchr-warns-startup-faces-liquidation/", "https://www.wamda.com/2021/10/fetchr-risk-liquidation", "https://news.bloomberglaw.com/bankruptcy-law/top-backer-of-dubai-app-fetchr-warns-startup-faces-liquidation"], "confidence": "verified"},
+        {"claim": "Current operational status (open vs. permanently closed)", "sources": [], "confidence": "flagged", "note": "Crunchbase reportedly lists it as 'permanently closed' but no primary source confirms a final date; search results are also polluted by unrelated companies with similar names (US 'Fetch Rewards', Israeli 'Fetcherr'). This is the intended test: Scout should say status is unclear, not assert a confident closure date."}
+      ],
+      "known_conflicts": [
+        "A UK Companies House entry 'FETCHR LTD' (company #11984856) surfaced in search — not confirmed whether it's the same entity as the Dubai startup. Real identity-resolution risk worth testing."
+      ]
+    },
+    {
+      "name": "Spotii",
+      "legal_name": "Spotii (exact legal entity unconfirmed)",
+      "tier": "sparse_conflicting",
+      "jurisdiction": "Unconfirmed — DIFC/ADGM/mainland not established",
+      "jurisdiction_confirmed": false,
+      "ground_truth_facts": [
+        {"claim": "Founding year", "sources": ["https://www.menabytes.com/spotii-launch/", "https://tracxn.com/d/companies/spotii/__0pZeJ8N36iIHbs55YB5X8zz55BkVb6ZFPIWTSmRHZqg"], "confidence": "flagged", "note": "sources disagree: 'founded 2019' vs 'founded/incorporated 2020'; platform publicly launched ~May 2020. Deliberately unresolved."},
+        {"claim": "Co-founded by Anuscha Iqbal and Ziyaad Ahmed", "sources": ["https://www.menabytes.com/spotii-launch/"], "confidence": "flagged"},
+        {"claim": "Acquired by Australia's Zip in 2021", "sources": ["https://www.businesswire.com/news/home/20210523005030/en/Zip-Expands-into-Europe-and-the-Middle-East-with-the-Acquisitions-of-European-BNPL-Provider-Twisto-and-UAE-based-Spotii", "https://www.menabytes.com/zip-acquires-spotii/", "https://www.thenationalnews.com/business/money/australia-s-buy-now-pay-later-company-buys-out-uae-s-spotii-for-16-3m-1.1228737"], "confidence": "verified"},
+        {"claim": "Acquisition price reported as $16.3 million", "sources": ["https://www.thenationalnews.com/business/money/australia-s-buy-now-pay-later-company-buys-out-uae-s-spotii-for-16-3m-1.1228737"], "confidence": "flagged", "note": "conflicts with the $20M figure reported elsewhere — deliberately kept as two separate flagged claims rather than reconciled"},
+        {"claim": "Acquisition price reported as $20 million", "sources": ["https://www.menabytes.com/zip-acquires-spotii/"], "confidence": "flagged"},
+        {"claim": "Zip exited the Middle East in 2023; Spotii then acquired by NymCard in June 2023", "sources": ["https://www.wamda.com/2023/06/nymcard-acquires-spotii", "https://gulfbusiness.com/nymcard-buys-middle-east-bnpl-firm-spotii/"], "confidence": "verified"}
+      ]
+    },
+    {
+      "name": "Pure Harvest Smart Farms",
+      "legal_name": "Pure Harvest Smart Farms Ltd",
+      "tier": "sparse_conflicting",
+      "jurisdiction": "Registered in ADGM (per company's own profile); HQ city disputed",
+      "jurisdiction_confirmed": false,
+      "ground_truth_facts": [
+        {"claim": "Founded by Sky Kurtz, Mahmoud Adi, and Robert Kupstas; founding year cited as 2016 by one source though earliest press coverage is 2017-2019", "sources": ["https://www.cbinsights.com/company/pure-harvest-smart-farms", "https://www.wamda.com/2019/01/conversation-sky-kurtz-uaes-pure-harvest"], "confidence": "flagged", "note": "founding year not reconciled across sources"},
+        {"claim": "Sky Kurtz is CEO, a former US private-equity investor", "sources": ["https://www.wamda.com/2019/01/conversation-sky-kurtz-uaes-pure-harvest"], "confidence": "flagged"},
+        {"claim": "Agtech company operating climate-controlled greenhouses; raised $180.5M from global investors in a 2022 round", "sources": ["https://www.businesswire.com/news/home/20220630005406/en/Pure-Harvest-Smart-Farms-Secures-USD-%24180.5-Million-From-Global-Investors-to-Fund-Expansion"], "confidence": "flagged"},
+        {"claim": "Total cumulative funding raised since 2017", "sources": [], "confidence": "flagged", "note": "irreconcilable: one source cites $287M since 2017, another cites $452M cumulative. Not resolved — deliberately left as a conflicting claim."},
+        {"claim": "As of Sept 2024, seeking $100M+ for expansion into Singapore, Morocco, and Kuwait, and spinning off its Saudi operation; backers per Semafor include the Olayan family, Metric Capital Partners, Franklin Templeton, Shuaa Capital, and IMM Investment Corp", "sources": ["https://www.semafor.com/article/09/23/2024/uae-pure-harvest-seeks-over-100-million-for-expansion"], "confidence": "flagged"}
+      ],
+      "known_conflicts": [
+        "HQ city disputed: Pure Harvest's own site, AGBI, and Abu Dhabi Startup directory say Abu Dhabi; one aggregator snippet said Dubai.",
+        "A single non-neutral advocacy source (boycottuae.org) raises governance-transparency concerns, uncorroborated by mainstream press — included as an adversarial test input Scout should treat as low-reliability, not fact."
+      ]
+    }
+  ]
+}

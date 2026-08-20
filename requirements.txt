@@ -1,0 +1,14 @@
+langgraph
+langchain
+langchain-core
+langchain-anthropic
+tavily-python
+pydantic
+langfuse
+fastapi
+uvicorn[standard]
+streamlit
+httpx
+python-dotenv
+tenacity
+pytest
