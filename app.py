@@ -75,9 +75,18 @@ def backend_config() -> dict:
 try:
     server = backend_config()
 except httpx.HTTPError as exc:
-    detail = (
-        f"HTTP {exc.response.status_code}" if isinstance(exc, httpx.HTTPStatusError) else str(exc)
-    )
+    if isinstance(exc, httpx.HTTPStatusError):
+        # Status plus who answered (Render's routing header, the body's
+        # first line): a proxy-level 429/503 reads very differently from
+        # an error raised by api.py itself.
+        resp = exc.response
+        first_line = resp.text.strip().splitlines()[0][:120] if resp.text.strip() else ""
+        routing = resp.headers.get("x-render-routing", "")
+        detail = ", ".join(
+            part for part in (f"HTTP {resp.status_code}", routing, first_line) if part
+        )
+    else:
+        detail = str(exc)
     st.error(
         f"The research backend isn't reachable right now ({detail}). "
         "Try again in a minute, or run Scout locally:"
