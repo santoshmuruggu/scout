@@ -30,6 +30,38 @@ st.warning(
     icon="⚠️",
 )
 
+# Statuses worth retrying: Render's edge intermittently answers 429 for
+# a while (seen on the live demo, from the proxy, not from api.py), and
+# 502/503/504 while a free-tier service is spinning up.
+RETRY_STATUSES = {429, 502, 503, 504}
+RETRY_DELAYS_SECONDS = (2, 4, 8, 16)
+
+
+def _call_backend(method: str, path: str, **kwargs) -> httpx.Response:
+    """One backend request, retried with backoff on transient proxy and
+    network errors. Raises like httpx would once the retries run out.
+
+    A POST starts a paid research run on the visitor's key, so it's only
+    retried when the request can't have reached api.py (a proxy 429/503,
+    or no connection at all) — never on a timeout or 502/504, which could
+    mean the run already started."""
+    if method == "POST":
+        statuses, transport_errors = {429, 503}, httpx.ConnectError
+    else:
+        statuses, transport_errors = RETRY_STATUSES, httpx.TransportError
+    for delay in (*RETRY_DELAYS_SECONDS, None):
+        try:
+            response = httpx.request(method, f"{API_BASE_URL}{path}", **kwargs)
+            if response.status_code not in statuses or delay is None:
+                response.raise_for_status()
+                return response
+        except transport_errors:
+            if delay is None:
+                raise
+        time.sleep(delay)
+    raise AssertionError("unreachable")
+
+
 RUN_LOCALLY = """
 **Don't have a Claude API key? Run Scout locally with Ollama.**
 The model runs on your own machine, so no Anthropic key is needed. Web
@@ -67,9 +99,7 @@ which the eval numbers in the README were measured with.
 
 @st.cache_data(ttl=300, show_spinner="Connecting to the research backend (can take ~30s if it was asleep)…")
 def backend_config() -> dict:
-    response = httpx.get(f"{API_BASE_URL}/config", timeout=90)
-    response.raise_for_status()
-    return response.json()
+    return _call_backend("GET", "/config", timeout=90).json()
 
 
 try:
@@ -155,19 +185,18 @@ if run_clicked and company.strip():
         # there's no long-running connection for a platform proxy to
         # time out mid-request regardless of how long the actual
         # research takes.
-        submit = httpx.post(
-            f"{API_BASE_URL}/research",
+        submit = _call_backend(
+            "POST",
+            "/research",
             json={"company": company.strip(), "anthropic_api_key": api_key},
             timeout=60,
         )
-        submit.raise_for_status()
         job_id = submit.json()["job_id"]
 
         with st.spinner(f"Researching {company.strip()}… this takes 1–3 minutes"):
             elapsed = 0
             while elapsed < MAX_WAIT_SECONDS:
-                status_response = httpx.get(f"{API_BASE_URL}/research/{job_id}", timeout=15)
-                status_response.raise_for_status()
+                status_response = _call_backend("GET", f"/research/{job_id}", timeout=15)
                 job = status_response.json()
 
                 if job["status"] == "done":
