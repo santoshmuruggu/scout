@@ -8,8 +8,8 @@ services:
     envVars:
       - key: TAVILY_API_KEY
         sync: false
-      - key: ANTHROPIC_API_KEY
-        sync: false
+      # No ANTHROPIC_API_KEY on purpose: the live demo is bring-your-own-
+      # key, and api.py ignores any key set here anyway.
       - key: LANGFUSE_HOST
         sync: false
       - key: LANGFUSE_PUBLIC_KEY

@@ -18,10 +18,12 @@ import sys
 from datetime import datetime, timezone
 from typing import TypedDict
 
-from langchain_anthropic import ChatAnthropic
+from langchain_core.runnables import RunnableConfig
 from langfuse import get_client
 from langfuse.langchain import CallbackHandler
 from langgraph.graph import END, StateGraph
+
+from llm import make_llm
 
 from schema import (
     ClaimCluster,
@@ -80,6 +82,14 @@ def _invoke_structured(structured_llm, prompt: str, step: str):
     # truncated field another time). Same failure shape as a flaky tool
     # call, same fix: retry before giving up.
     return structured_llm.invoke(prompt, config=_traced(step))
+
+
+def _llm(config: RunnableConfig):
+    # The chat model is built once per run in run_state() and handed to
+    # the nodes through the run config, not kept in ResearchState: when
+    # it's Claude it carries the visitor's API key, and graph state is
+    # the kind of thing that gets logged, traced, or checkpointed.
+    return config["configurable"]["llm"]
 
 
 def generate_sub_questions(company: str) -> list[str]:
@@ -144,7 +154,7 @@ def _findings_text(findings: list[Finding]) -> str:
     )
 
 
-def cluster_node(state: ResearchState) -> dict:
+def cluster_node(state: ResearchState, config: RunnableConfig) -> dict:
     """Group raw findings into atomic claims, each tagged with every
     source URL that actually backs it. This is the semantic-judgment half
     of verification — the domain-counting decision itself happens next,
@@ -154,7 +164,7 @@ def cluster_node(state: ResearchState) -> dict:
     if not findings:
         return {"verified": [], "flagged": []}
 
-    llm = ChatAnthropic(model="claude-sonnet-5", max_tokens=16000)
+    llm = _llm(config)
     structured_llm = llm.with_structured_output(ClaimClusters)
 
     prompt = (
@@ -188,7 +198,7 @@ def cluster_node(state: ResearchState) -> dict:
     return {"verified": verified, "flagged": flagged}
 
 
-def synthesize_node(state: ResearchState) -> dict:
+def synthesize_node(state: ResearchState, config: RunnableConfig) -> dict:
     company = state["company"]
     verified, flagged = state["verified"], state["flagged"]
 
@@ -212,7 +222,7 @@ def synthesize_node(state: ResearchState) -> dict:
         for f in key_facts
     )
 
-    llm = ChatAnthropic(model="claude-sonnet-5", max_tokens=16000)
+    llm = _llm(config)
     structured_llm = llm.with_structured_output(ReportNarrative)
 
     prompt = (
@@ -245,7 +255,7 @@ def synthesize_node(state: ResearchState) -> dict:
     return {"report": report}
 
 
-def critique_node(state: ResearchState) -> dict:
+def critique_node(state: ResearchState, config: RunnableConfig) -> dict:
     """Self-check pass over the drafted narrative. key_facts/confidence
     are already deterministic (verify.py decided them, not a model), so
     this only reviews the free-text parts synthesize_node wrote — summary
@@ -261,7 +271,7 @@ def critique_node(state: ResearchState) -> dict:
         for f in report.key_facts
     )
 
-    llm = ChatAnthropic(model="claude-sonnet-5", max_tokens=16000)
+    llm = _llm(config)
     structured_llm = llm.with_structured_output(ReportNarrative)
 
     # Render red_flags as an actual bulleted list, not str(list) — feeding
@@ -314,20 +324,21 @@ def build_graph():
     return graph.compile()
 
 
-def run_state(company: str) -> ResearchState:
+def run_state(company: str, api_key: str | None = None) -> ResearchState:
     """Run the full pipeline and return the final state — findings,
     verified/flagged clusters, tool-call reliability data, and the
     report. Used by the eval harness, which needs more than just the
     report. run() below is the thin wrapper for normal callers.
     """
+    llm = make_llm(api_key)
     app = build_graph()
     langfuse = get_client()
     # No separate "trace" type in this SDK — the root-most observation of
     # a tree *is* the trace. "agent" is the closest semantic fit for
     # "the whole plan-act-verify-synthesize-critique run."
     with langfuse.start_as_current_observation(
-        as_type="agent", name=f"scout-research: {company}"
-    ):
+        as_type="agent", name=f"scout-research: {company}", input={"company": company}
+    ) as root:
         result = app.invoke(
             {
                 "company": company,
@@ -338,19 +349,21 @@ def run_state(company: str) -> ResearchState:
                 "report": None,
                 "tool_calls": 0,
                 "tool_errors": [],
-            }
+            },
+            config={"configurable": {"llm": llm}},
         )
         report = result["report"]
-        langfuse.set_current_trace_io(
-            input={"company": company},
-            output={"key_facts": len(report.key_facts)} if report else {},
-        )
+        # Set on the root observation itself rather than through a
+        # client-level "current trace" helper: those helpers have been
+        # renamed/removed across Langfuse SDK majors (set_current_trace_io
+        # is gone in v5), while observation.update() is stable.
+        root.update(output={"key_facts": len(report.key_facts)} if report else {})
     langfuse.flush()
     return result
 
 
-def run(company: str) -> DueDiligenceReport:
-    return run_state(company)["report"]
+def run(company: str, api_key: str | None = None) -> DueDiligenceReport:
+    return run_state(company, api_key)["report"]
 
 
 if __name__ == "__main__":

@@ -1,6 +1,10 @@
 """Streamlit UI — calls the FastAPI backend (api.py) over HTTP rather
 than importing graph.py directly, so the UI and the research pipeline can
-be deployed and scaled as separate Railway services.
+be deployed and scaled as separate Render services.
+
+Bring-your-own-key: the live demo has no Anthropic key of its own. A
+visitor either pastes theirs in the sidebar, or gets instructions for
+running Scout locally with an Ollama model instead.
 """
 
 import os
@@ -13,7 +17,9 @@ API_BASE_URL = os.environ.get("SCOUT_API_URL", "http://localhost:8000")
 POLL_INTERVAL_SECONDS = 3
 MAX_WAIT_SECONDS = 360
 
-st.set_page_config(page_title="Scout", page_icon="🔎", layout="centered")
+st.set_page_config(
+    page_title="Scout", page_icon="🔎", layout="centered", initial_sidebar_state="expanded"
+)
 
 st.title("🔎 Scout")
 st.caption("Autonomous due-diligence research for UAE companies")
@@ -23,6 +29,91 @@ st.warning(
     "before relying on this for a real decision.",
     icon="⚠️",
 )
+
+RUN_LOCALLY = """
+**Don't have a Claude API key? Run Scout locally with Ollama.**
+The model runs on your own machine, so no Anthropic key is needed. Web
+search still goes through [Tavily](https://app.tavily.com), which has a
+free tier (about 9 credits per report).
+
+1. Install [Ollama](https://ollama.com/download) and pull a model that
+   handles structured output well:
+   ```bash
+   ollama pull qwen2.5:14b
+   ```
+2. Clone and install Scout:
+   ```bash
+   git clone https://github.com/santoshmuruggu/scout.git
+   cd scout
+   python -m venv venv && source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+3. Create a `.env` file:
+   ```bash
+   LLM_PROVIDER=ollama
+   TAVILY_API_KEY=tvly-...
+   # optional: OLLAMA_MODEL=qwen2.5:14b, Langfuse keys for tracing
+   ```
+4. Start the backend and the UI (two terminals):
+   ```bash
+   uvicorn api:app --port 8000
+   streamlit run app.py
+   ```
+
+Smaller local models cluster and verify claims less reliably than Claude,
+which the eval numbers in the README were measured with.
+"""
+
+
+@st.cache_data(ttl=300, show_spinner="Connecting to the research backend (can take ~30s if it was asleep)…")
+def backend_config() -> dict:
+    response = httpx.get(f"{API_BASE_URL}/config", timeout=90)
+    response.raise_for_status()
+    return response.json()
+
+
+try:
+    server = backend_config()
+except httpx.HTTPError as exc:
+    detail = (
+        f"HTTP {exc.response.status_code}" if isinstance(exc, httpx.HTTPStatusError) else str(exc)
+    )
+    st.error(
+        f"The research backend isn't reachable right now ({detail}). "
+        "Try again in a minute, or run Scout locally:"
+    )
+    st.markdown(RUN_LOCALLY)
+    st.stop()
+
+api_key = None
+if server["provider"] == "ollama":
+    st.info(f"Running locally with Ollama model `{server['model']}`.", icon="🦙")
+elif server["needs_api_key"]:
+    with st.sidebar:
+        st.subheader("🔑 Claude API key")
+        api_key = st.text_input(
+            "Anthropic API key",
+            type="password",
+            placeholder="sk-ant-...",
+            help="Get one at console.anthropic.com. It's sent only to Scout's "
+                 "backend for your research run, held in memory for that run, "
+                 "and never stored or logged.",
+        ).strip() or None
+        st.caption(
+            f"One report is 3 `{server['model']}` calls: roughly $0.15. "
+            "[Get a key](https://console.anthropic.com/settings/keys)"
+        )
+    if not api_key:
+        st.info(
+            "**This demo needs your own Claude API key to run research.** Paste "
+            "it in the sidebar (open it with **>** at the top left on mobile).",
+            icon="🔑",
+        )
+        st.markdown(RUN_LOCALLY)
+        st.stop()
+    if not api_key.startswith("sk-ant-"):
+        st.error("That doesn't look like an Anthropic API key. They start with `sk-ant-`.")
+        st.stop()
 
 company = st.text_input("Company name", placeholder="e.g. Beehive, Sarwa, Careem")
 run_clicked = st.button("Research", type="primary", disabled=not company.strip())
@@ -56,7 +147,9 @@ if run_clicked and company.strip():
         # time out mid-request regardless of how long the actual
         # research takes.
         submit = httpx.post(
-            f"{API_BASE_URL}/research", json={"company": company.strip()}, timeout=15
+            f"{API_BASE_URL}/research",
+            json={"company": company.strip(), "anthropic_api_key": api_key},
+            timeout=60,
         )
         submit.raise_for_status()
         job_id = submit.json()["job_id"]

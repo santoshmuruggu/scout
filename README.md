@@ -5,8 +5,10 @@ company name, get back a structured brief: what's verified, what's
 flagged, and where every claim came from.
 
 **Live demo:** https://scout-ui-nqv9.onrender.com
-(cold starts on Render's free tier — first request can take ~30s before
-the actual 1-3 minute research run even begins)
+(bring your own [Claude API key](https://console.anthropic.com/settings/keys),
+pasted into the sidebar. No key? [Run it locally with Ollama](#running-it-locally).
+Cold starts on Render's free tier: the first request can take ~30s before
+the actual 1-3 minute research run even begins.)
 
 > Research aid for a first pass, not a KYC/compliance decisioning tool.
 > Public, non-authenticated web sources only.
@@ -164,7 +166,7 @@ and the retry succeeded on the second attempt:
 | Structured source | DFSA public register + DIFC Registrar (link-only) | Real, citable, high-trust |
 | Validation | Pydantic | Typed structured output, not free text |
 | Tracing | Langfuse Cloud | Per-run trace, nested LLM spans, cost/latency |
-| Reasoning | Anthropic Claude | Plan/synthesize/critique nodes |
+| Reasoning | Anthropic Claude (visitor's own key), or a local Ollama model | Cluster/synthesize/critique nodes |
 | Backend | FastAPI | Thin, submit-then-poll API in front of the graph |
 | UI | Streamlit | Polls the API, renders the structured report |
 | Deploy | Render (2 services, one repo) | Needs a persistent backend, not just a UI host |
@@ -172,9 +174,24 @@ and the retry succeeded on the second attempt:
 ## Running it locally
 
 ```bash
+git clone https://github.com/santoshmuruggu/scout.git && cd scout
 pip install -r requirements.txt
-cp .env.example .env   # fill in TAVILY_API_KEY, ANTHROPIC_API_KEY, LANGFUSE_*
+cp .env.example .env   # fill in TAVILY_API_KEY, a model (below), optionally LANGFUSE_*
+```
 
+Pick a model in `.env`:
+
+- **Claude** (what the eval numbers above were measured with): set
+  `ANTHROPIC_API_KEY`.
+- **Ollama, no Anthropic key**: install [Ollama](https://ollama.com/download),
+  `ollama pull qwen2.5:14b`, and set `LLM_PROVIDER=ollama` (plus
+  `OLLAMA_MODEL` to use a different model). Pick a model that handles
+  structured JSON output well. Small local models cluster claims less
+  reliably than Claude.
+
+Langfuse is optional: without its keys, tracing just switches off.
+
+```bash
 uvicorn api:app --reload --port 8000        # backend
 SCOUT_API_URL=http://localhost:8000 streamlit run app.py   # UI, separate terminal
 ```
@@ -185,17 +202,29 @@ Or hit the graph directly without the API/UI layer:
 python graph.py "Beehive"
 ```
 
+### Bring-your-own-key on the live demo
+
+The deployed demo has no Anthropic key of its own. The UI asks for the
+visitor's key and sends it with the research request. `api.py` checks it
+with one free `models.list` call so a bad key fails in a second instead of
+after the web searches, then hands it to the graph for that one run. It
+isn't stored in the job table, logged, or put into graph state (the model
+object travels through LangGraph's run config instead). Server-side, a key
+is only ever read from a local `.env` file, so an `ANTHROPIC_API_KEY`
+configured on the host is ignored.
+
 ## Repo structure
 
 ```
 scout/
 ├── graph.py            # LangGraph state machine: plan -> act -> cluster -> synthesize -> critique
+├── llm.py               # model choice: Claude with an explicit key, or local Ollama
 ├── schema.py            # Pydantic models — Finding, ClaimCluster, Fact, DueDiligenceReport
 ├── verify.py             # the deterministic verified/flagged decision
 ├── tools/
 │   ├── search.py          # Tavily web + news search, with retry/backoff
 │   └── difc.py             # DFSA register lookup + DIFC register citation
-├── api.py                 # FastAPI: submit-then-poll research endpoint
+├── api.py                 # FastAPI: submit-then-poll research endpoint + /config
 ├── app.py                 # Streamlit UI
 ├── eval/
 │   ├── companies.json      # 15-company eval set with hand-drafted ground truth
